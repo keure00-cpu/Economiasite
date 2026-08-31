@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Curso de Economia</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+header{
+    background:linear-gradient(135deg,#0f172a,#1d4ed8);
+    color:white;
+    padding:40px 20px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin:0 0 10px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#dbeafe;
+    max-width:700px;
+}
+
+.progress-box{
+    background:rgba(255,255,255,.12);
+    padding:20px;
+    border-radius:16px;
+    min-width:220px;
+}
+
+.progress-bar{
+    height:10px;
+    background:rgba(255,255,255,.2);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#60a5fa;
+}
+
+main{
+    padding:30px 20px;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+}
+
+.sidebar,
+.lesson,
+.quiz,
+.certificate{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+}
+
+.sidebar{
+    padding:16px;
+    height:max-content;
+    position:sticky;
+    top:20px;
+}
+
+.sidebar h3{
+    margin:8px;
+}
+
+.module-btn{
+    width:100%;
+    border:0;
+    background:none;
+    padding:13px;
+    margin:3px 0;
+    text-align:left;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#172033;
+}
+
+.module-btn:hover,
+.module-btn.active{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.lesson{
+    padding:30px;
+}
+
+.lesson h2{
+    font-size:32px;
+    margin-top:0;
+}
+
+.meta{
+    color:#667085;
+    margin-bottom:10px;
+}
+
+.video{
+    aspect-ratio:16/9;
+    background:#080f1f;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    margin:25px 0;
+}
+
+.play{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    margin:auto;
+}
+
+.lesson-text{
+    line-height:1.8;
+    font-size:17px;
+}
+
+.example{
+    background:#eff6ff;
+    border-left:4px solid #2563eb;
+    padding:18px;
+    border-radius:8px;
+    margin:20px 0;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+button{
+    font-family:inherit;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:13px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.primary{
+    background:#2563eb;
+    color:white;
+}
+
+.primary:hover{
+    background:#1d4ed8;
+}
+
+.secondary{
+    background:#eef2f7;
+    color:#172033;
+}
+
+.quiz{
+    margin-top:20px;
+    padding:25px;
+}
+
+.option{
+    display:block;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#f8fafc;
+}
+
+.result{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.certificate{
+    display:none;
+    margin-top:20px;
+    padding:40px;
+    text-align:center;
+    border:2px solid #bfdbfe;
+    background:#eff6ff;
+}
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    color:#667085;
+}
+
+@media(max-width:800px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:static;
+    }
+
+    .hero{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .progress-box{
+        width:100%;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container hero">
+
+<div>
+
+<h1>🎓 Curso de Economia</h1>
+
+<p>
+Do Zero ao Avançado — aprenda economia de forma simples,
+prática e organizada.
+</p>
+
+</div>
+
+<div class="progress-box">
+
+<strong>Seu progresso</strong>
+
+<p id="progressText">
+0% concluído
+</p>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+id="progressFill">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container layout">
+
+<aside class="sidebar">
+
+<h3>📚 Conteúdo</h3>
+
+<div id="modules"></div>
+
+</aside>
+
+
+<section>
+
+<article class="lesson">
+
+<div
+class="meta"
+id="lessonMeta">
+</div>
+
+<h2 id="lessonTitle">
+</h2>
+
+
+<!-- ÁREA DO VÍDEO -->
+
+<div class="video">
+
+<div>
+
+<div class="play">
+▶
+</div>
+
+<p>
+Vídeo da aula
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="lesson-text"
+id="lessonBody">
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn primary"
+id="completeBtn">
+
+✓ Marcar como concluída
+
+</button>
+
+<button
+class="btn secondary"
+id="nextBtn">
+
+Próxima aula →
+
+</button>
+
+</div>
+
+</article>
+
+
+<section class="quiz">
+
+<h3>
+🧠 Quiz da aula
+</h3>
+
+<div id="quiz"></div>
+
+</section>
+
+
+<section
+class="certificate"
+id="certificate">
+
+<h2>
+🏆 Parabéns!
+</h2>
+
+<p>
+Você concluiu todas as aulas do Curso de Economia.
+</p>
+
+<h3>
+CERTIFICADO DE CONCLUSÃO
+</h3>
+
+<p>
+Curso de Economia — Do Zero ao Avançado
+</p>
+
+<button
+class="btn primary"
+onclick="window.print()">
+
+Imprimir certificado
+
+</button>
+
+</section>
+
+</section>
+
+</div>
+
+</main>
+
+
+<footer>
+
+Curso de Economia © 2026
+
+</footer>
+
+
+<script>
+
+/* ============================
+   CURSO
+============================ */
+
+const modules = [
+
+{
+title:"Módulo 1 — Fundamentos",
+
+lessons:[
+
+{
+title:"O que é Economia?",
+
+text:"Economia é o estudo de como pessoas, empresas e governos tomam decisões diante de recursos limitados.",
+
+example:"A economia não trata apenas de dinheiro. Ela também estuda escolhas, incentivos, produção, consumo e distribuição.",
+
+question:"O que é estudado pela Economia?",
+
+options:[
+"Somente dinheiro",
+"Escolhas diante da escassez",
+"Somente bancos",
+"Somente empresas"
+],
+
+answer:1
+},
+
+{
+title:"Escassez e escolhas",
+
+text:"A escassez acontece porque os recursos disponíveis são limitados enquanto os desejos e necessidades humanas são amplos.",
+
+example:"Como uma pessoa possui tempo limitado, precisa escolher entre trabalhar, estudar, descansar ou realizar outras atividades.",
+
+question:"Por que existe escassez?",
+
+options:[
+"Porque os recursos são ilimitados",
+"Porque os recursos são limitados",
+"Porque não existem mercados",
+"Porque não existe dinheiro"
+],
+
+answer:1
+},
+
+{
+title:"Custo de oportunidade",
+
+text:"Custo de oportunidade é o valor da melhor alternativa que foi sacrificada quando fazemos uma escolha.",
+
+example:"Se você decide estudar por duas horas, o custo de oportunidade pode ser o melhor uso alternativo dessas duas horas.",
+
+question:"O custo de oportunidade representa:",
+
+options:[
+"A melhor alternativa sacrificada",
+"Somente impostos",
+"O salário mínimo",
+"O preço de um produto"
+],
+
+answer:0
+},
+
+{
+title:"Oferta e demanda",
+
+text:"A demanda representa quanto os consumidores desejam comprar. A oferta representa quanto os produtores desejam vender.",
+
+example:"Se muitas pessoas querem comprar determinado produto e a quantidade disponível não aumenta, seu preço pode subir.",
+
+question:"Se a demanda aumenta e a oferta permanece igual, o preço tende a:",
+
+options:[
+"Subir",
+"Desaparecer",
+"Ficar sempre igual",
+"Ser zero"
+],
+
+answer:0
+},
+
+{
+title:"Como funcionam os mercados",
+
+text:"Mercados conectam compradores e vendedores. Os preços funcionam como sinais que ajudam a coordenar decisões econômicas.",
+
+example:"Um preço maior pode incentivar produtores a aumentar a produção.",
+
+question:"Uma função importante dos preços é:",
+
+options:[
+"Transmitir sinais e incentivos",
+"Eliminar todos os problemas",
+"Impedir concorrência",
+"Eliminar impostos"
+],
+
+answer:0
+}
+
+]
+},
+
+
+{
+title:"Módulo 2 — Microeconomia",
+
+lessons:[
+
+{
+title:"Consumidores e empresas",
+
+text:"Consumidores escolhem como utilizar sua renda. Empresas decidem o que produzir, quanto produzir e quais recursos utilizar.",
+
+example:"Uma empresa compara custos e receitas para decidir se vale a pena aumentar sua produção.",
+
+question:"O consumidor enfrenta principalmente:",
+
+options:[
+"Recursos ilimitados",
+"Escolhas e restrições de renda",
+"Nenhuma restrição",
+"Somente impostos"
+],
+
+answer:1
+},
+
+{
+title:"Elasticidade",
+
+text:"Elasticidade mede o quanto uma variável reage a mudanças em outra.",
+
+example:"A elasticidade-preço da demanda mostra como a quantidade comprada reage a mudanças no preço.",
+
+question:"Elasticidade mede:",
+
+options:[
+"Sensibilidade entre variáveis",
+"Somente inflação",
+"Somente desemprego",
+"O tamanho de um país"
+],
+
+answer:0
+},
+
+{
+title:"Concorrência",
+
+text:"A concorrência ocorre quando diferentes empresas disputam consumidores em um mercado.",
+
+example:"A concorrência pode estimular empresas a melhorar preços, qualidade e inovação.",
+
+question:"A concorrência pode estimular:",
+
+options:[
+"Inovação",
+"Monopólio obrigatório",
+"Fim dos consumidores",
+"Fim dos preços"
+],
+
+answer:0
+},
+
+{
+title:"Monopólio e oligopólio",
+
+text:"Monopólio ocorre quando uma empresa domina um mercado. Oligopólio ocorre quando poucas empresas concentram grande participação.",
+
+example:"Em um oligopólio, as empresas precisam considerar as decisões de suas concorrentes.",
+
+question:"Oligopólio significa:",
+
+options:[
+"Uma empresa",
+"Poucas empresas dominantes",
+"Milhões de empresas",
+"Nenhum vendedor"
+],
+
+answer:1
+},
+
+{
+title:"Custos e lucros",
+
+text:"Empresas possuem custos fixos e variáveis. O lucro é obtido comparando receitas e custos.",
+
+example:"Matéria-prima normalmente representa um custo que varia com a quantidade produzida.",
+
+question:"Qual custo tende a variar com a produção?",
+
+options:[
+"Custo variável",
+"Custo fixo",
+"Nenhum custo",
+"Imposto de renda sempre"
+],
+
+answer:0
+}
+
+]
+},
+
+
+{
+title:"Módulo 3 — Macroeconomia",
+
+lessons:[
+
+{
+title:"PIB e crescimento econômico",
+
+text:"O Produto Interno Bruto, PIB, mede o valor dos bens e serviços finais produzidos em uma economia durante determinado período.",
+
+example:"O crescimento
